@@ -10,49 +10,49 @@ typedef struct {
 
 TFila fila;
 
-void enqueue(int info, int tamanho){
-    if (fila.fim == tamanho - 1){
+void enqueue(TFila *f,int info, int tamanho){
+    if (f->fim == tamanho - 1){
         printf("\nFila cheia\n\n");
         return; 
     }
 
-    fila.dados[++(fila.fim)] = info;
+    f->dados[++(f->fim)] = info;
 }
 
-void dequeue(){
+void dequeue(TFila *f){
     int i;
     
-    if(fila.fim == -1){
+    if(f->fim == -1){
         printf("\nFila Vazia\n");
         return;
     
     }else{
     
-        for (i = 0; i < fila.fim; i++){
-            fila.dados[i] = fila.dados[i + 1];
+        for (i = 0; i < f->fim; i++){
+            f->dados[i] = f->dados[i + 1];
         }
-        fila.fim--;
+        (f->fim)--;
 
         printf("\nElemento Removido da Fila!!");
     }
 }
 
-void listar(){
+void listar(TFila *f){
     int i;
     printf("\n\nListando\n");
     printf("\nElementos da Fila: ");
     
-    for (i = 0; i <= fila.fim; i++){
-            printf("\n[%d] --> %d  \n",i, fila.dados[i]);
+    for (i = 0; i <= f->fim; i++){
+            printf("[%d] --> %d  |",i, f->dados[i]);
     }    
 }
 
-int buscar(int chave){
+int buscar(TFila *f,int chave){
     int i;
     
-    for(i = 0 ; i <= fila.fim; i++){
+    for(i = 0 ; i <= f->fim; i++){
         
-        if(fila.dados[i] == chave){
+        if(f->dados[i] == chave){
             return i; 
         }
     }
@@ -78,22 +78,22 @@ int main(int argc, char** argv) {
             printf("\nInforme o valor: ");
             scanf("%d", &leitura);
 
-            enqueue(leitura, SIZE);
+            enqueue(&fila,leitura, SIZE);
             break;
 
         case 2:
-            dequeue(SIZE);
+            dequeue(&fila);
             break;
 
         case 3:
-            listar();
+            listar(&fila);
             break;
 
         case 4:
             printf("\nInforme a chave da busca: ");
             scanf("%d", &key);
 
-            int posicao = buscar(key);
+            int posicao = buscar(&fila,key);
             if (posicao == -1)
                 printf("Chave da busca não encontrada na pilha\n\n");
             else

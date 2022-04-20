@@ -11,44 +11,44 @@ typedef struct {
 TPilha pilha;
 
 
-void push(int info, int tamanho){
-    if (pilha.topo == tamanho - 1){
+void push(TPilha *p, int info, int tamanho){
+    if (p->topo == tamanho - 1){
         printf("\nPilha cheia\n\n");
         return; 
     }
 
-    pilha.dados[++(pilha.topo)] = info;
+    p->dados[++(p->topo)] = info;
 }
 
-void listar(){
+void listar(TPilha *p){
     int i;
     printf("\n\nListando\n");
     printf("\nElementos da Pilha: ");
-    for (i = pilha.topo; i >= 0; i--){
-            printf("\n[%d] --> %d  \n",i, pilha.dados[i]);
+    for (i = p->topo; i >= 0; i--){
+            printf("\n[%d] --> %d  \n",i, p->dados[i]);
     }
 }
 
-int buscar(int chave){
+int buscar(TPilha *p, int chave){
     int i;
     
-    for(i = pilha.topo ; i >= 0; i--){
+    for(i = p->topo ; i >= 0; i--){
         
-        if(pilha.dados[i] == chave){
+        if(p->dados[i] == chave){
             return i; 
         }
     }
     return -1;
 }
 
-void pop(){
+void pop(TPilha *p){
     
-    if(pilha.topo == -1){
+    if(p->topo == -1){
         printf("\nPilha Vazia!!!\n\n");
         return;
     }
     
-    pilha.dados[pilha.topo--];
+    p->dados[(p->topo)--];
     printf("\nElemento removido da Pilha.\n");
     
  }
@@ -69,22 +69,22 @@ int main(int argc, char** argv) {
            printf("\nInforme o valor: ");
            scanf("%d", &leitura);
 
-           push(leitura,SIZE);
+           push(&pilha,leitura,SIZE);
            break;
 
        case 2:
-           pop();
+           pop(&pilha);
            break;
 
        case 3:
-           listar();
+           listar(&pilha);
            break;
 
        case 4:
            printf("\nInforme a chave da busca: ");
            scanf("%d", &key);
 
-           int posicao = buscar(key);
+           int posicao = buscar(&pilha, key);
            if (posicao == -1)
                printf("Chave da busca não encontrada na pilha\n\n");
            else
