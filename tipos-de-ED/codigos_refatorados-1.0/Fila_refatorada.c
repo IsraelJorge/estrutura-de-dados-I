@@ -26,7 +26,7 @@ void enqueue(TFila *f,int info, int tamanho){
 }
 
 void dequeue(TFila *f, int tamanho){
-    int i;
+   
     
     if(f->nItens == 0){
         printf("\nFila Vazia!!!\n");
